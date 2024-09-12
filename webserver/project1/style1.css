@@ -1,0 +1,293 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+header h1 {
+    font-family: "Microsoft YaHei";
+    position: absolute;
+    right: 200px;
+    top: 0;
+    line-height: 94px;
+    background-image: url("images/miku.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 80px;
+    text-indent: -9999px;
+}
+header{
+    background-color:rgba(35, 28, 26, 0.8);
+    height: 90px;
+    width: 100%;
+    position: fixed;
+}
+header a{
+    color: white;
+    text-decoration: none;
+}
+header li {
+    display: inline;
+    margin-right:4vw;
+}
+header ul {
+    font-family: "Microsoft YaHei";
+    font-weight: 100;
+    font-size: 18px;
+    position: absolute;
+    left: 3vw;
+    top: 0;
+    line-height: 90px;
+}
+header a:hover {
+    text-decoration: underline;
+}
+header h2 {
+    font-family: "Microsoft YaHei";
+    color: white;
+    font-weight: 100;
+    font-size: 28px;
+    position: absolute;
+    right: 3vw;
+    top: 0;
+    line-height: 70px;
+}
+header h3 {
+    font-family: "Microsoft YaHei";
+    color: white;
+    font-weight: 200;
+    font-size: 12px;
+    position: absolute;
+    right: 6.2vw;
+    top: 0;
+    line-height: 120px;
+}
+.homepage {
+    background-color:black ;
+    background-image:url("images/1.jpg") ;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.homepage h2 {
+    color: white;
+    font-weight: 500;
+    font-size: 25px;
+    position: relative;
+    height: 1000px;
+    left: 5vw;
+    top: 18vw;
+    line-height: 50px;
+}
+
+.keyboard {
+    padding: 20px 0;
+    display: flex;
+    background-color: black;
+    color: white;
+    justify-content:center;
+    align-items: center;
+}
+
+.keyboard h2{
+    width: 50%;
+    color: white;
+    font-weight: 300;
+    font-size: 25px;
+    position: relative;
+    left: 5vw;
+    line-height:20px;
+}
+.keyboard img{
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    right: 0;
+}
+
+.pc {
+    padding: 20px 0;
+    display: flex;
+    background-color: black;
+    color: white;
+    justify-content:center;
+    align-items: center;
+}
+.pc h2{
+    width: 50%;
+    font-size: 35px;
+    color: white;
+    font-weight: 300;
+    right: 0vw;
+    position: relative;
+    line-height:20px;
+}
+.pc img{
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    right: 0;
+}
+
+.pc2 {
+    padding: 20px 0;
+    display: flex;
+    background-color: black;
+    color: white;
+    justify-content:center;
+    align-items: center;
+}
+
+.pc2 img{
+    justify-content: center;
+    align-items: center;
+    height: 630px;
+    padding: 10px;
+}
+
+.hifi {
+    padding: 20px 0;
+    display: flex;
+    background-color: black;
+    color: white;
+    justify-content:center;
+    align-items: center;
+}
+
+.hifi h2{
+    width: 25%;
+    color: white;
+    font-weight: 300;
+    font-size: 25px;
+    position: relative;
+    left: 2cqb;
+    line-height:20px;
+}
+.hifi img{
+    padding: 10px;
+    width: 30%;
+    justify-content: center;
+    align-items: center;
+    height: 800;
+    right: 0;
+}
+
+.model {
+    padding: 20px 0;
+    display: flex;
+    background-color: black;
+    color: white;
+    justify-content:center;
+    align-items: center;
+}
+
+.model h2{
+    width: 25%;
+    color: white;
+    font-weight: 300;
+    font-size: 25px;
+    position: relative;
+    left: 5ch;
+    line-height:35px;
+}
+.model img{
+    padding: 10px;
+    width: 30%;
+    justify-content: center;
+    align-items: center;
+    height: 800;
+    right: 0;
+}
+
+.re {
+    padding: 20px 0;
+    display: flex;
+    background-color: black;
+    color: white;
+    justify-content:center;
+    align-items: center;
+}
+.re h2{
+    width: 50%;
+    color: white;
+    font-weight: 300;
+    font-size: 25px;
+    position: relative;
+    left: 6vw;
+    line-height:35px;
+}
+.re img{
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    right: 0;
+}
+
+.re2 {
+    padding: 20px 0;
+    display: flex;
+    background-color: black;
+    color: white;
+    justify-content:center;
+    align-items: center;
+}
+
+.re2 img{
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    padding: 10px;
+}
+
+.re3 {
+    padding: 20px 0;
+    display: flex;
+    background-color: black;
+    color: white;
+    justify-content:center;
+    align-items: center;
+}
+
+.re3 img{
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    padding: 10px;
+}
+
+.handmade {
+    padding: 20px 0;
+    display: flex;
+    background-color: black;
+    color: white;
+    justify-content:center;
+    align-items: center;
+}
+
+.handmade h2{
+    width: 25%;
+    color: white;
+    font-weight: 300;
+    font-size: 25px;
+    position: relative;
+    line-height:35px;
+}
+.handmade img{
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 450px;
+    right: 0;
+}
+
+main{
+    background-color: black;
+}
+footer{
+    background-color: black;
+    color: white;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    line-height: 1.8em;
+}

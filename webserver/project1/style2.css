@@ -1,0 +1,201 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+header h1 {
+    font-family: "Microsoft YaHei";
+    position: absolute;
+    right: 200px;
+    top: 0;
+    line-height: 94px;
+    background-image: url("images/miku.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 80px;
+    text-indent: -9999px;
+}
+header{
+    background-color:rgba(35, 28, 26, 0.8);
+    height: 90px;
+    width: 100%;
+    position: fixed;
+}
+header a{
+    color: white;
+    text-decoration: none;
+}
+header li {
+    display: inline;
+    margin-right:4vw;
+}
+header ul {
+    font-family: "Microsoft YaHei";
+    font-weight: 100;
+    font-size: 18px;
+    position: absolute;
+    left: 3vw;
+    top: 0;
+    line-height: 90px;
+}
+header a:hover {
+    text-decoration: underline;
+}
+header h2 {
+    font-family: "Microsoft YaHei";
+    color: white;
+    font-weight: 100;
+    font-size: 28px;
+    position: absolute;
+    right: 3vw;
+    top: 0;
+    line-height: 70px;
+}
+header h3 {
+    font-family: "Microsoft YaHei";
+    color: white;
+    font-weight: 200;
+    font-size: 12px;
+    position: absolute;
+    right: 6.2vw;
+    top: 0;
+    line-height: 120px;
+}
+main h2 {
+    color: white;
+    display: flex;
+    font-weight: 100;
+    font-size: 50px;
+    height: 1000px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+main {
+    background-color: black;
+}
+
+.homepage {
+    background-color:black ;
+    background-image:url("images/18.jpg") ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 1000px;
+}
+.homepage h2 {
+    color: white;
+    font-weight: 300;
+    font-size: 35px;
+    position: relative;
+    height: 1000px;
+    top: 15vw;
+    line-height: 50px;
+}
+
+.render1 {
+    padding: 20px 0;
+    display: inline;
+    background-color: black;
+    color: black;
+    justify-content:center;
+    align-items: center;
+}
+
+.render1 img{
+    justify-content: center;
+    align-items: center;
+    width: 1850px;
+    padding: 20px;
+}
+
+.render2 {
+    padding: 20px 0;
+    display: flex;
+    background-color: black;
+    color: black;
+    justify-content:center;
+    align-items: center;
+}
+
+.render2 img{
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    padding: 20px;
+}
+
+.render3 {
+    padding: 20px 0;
+    display: flex;
+    background-color: black;
+    color: black;
+    justify-content:center;
+    align-items: center;
+}
+
+.render3 img{
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    padding: 20px;
+}
+
+.render4 {
+    padding: 20px 0;
+    display: flex;
+    background-color: black;
+    color: black;
+    justify-content:center;
+    align-items: center;
+}
+
+.render4 img{
+    justify-content: center;
+    align-items: center;
+    height: 420px;
+    padding: 20px;
+}
+
+.drawing1 {
+    padding: 20px 0;
+    display: flex;
+    background-color: black;
+    color: black;
+    justify-content:center;
+    align-items: center;
+}
+
+.drawing1 img{
+    justify-content: center;
+    align-items: center;
+    height: 410px;
+    padding: 20px;
+}
+
+.drawing2 {
+    padding: 20px 0;
+    display: flex;
+    background-color: black;
+    color: black;
+    justify-content:center;
+    align-items: center;
+}
+
+.drawing2 img{
+    justify-content: center;
+    align-items: center;
+    height: 740px;
+    padding: 20px;
+}
+
+footer{
+    background-color: black;
+    color: white;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    line-height: 1.8em;
+}
