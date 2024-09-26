@@ -1,0 +1,242 @@
+.textBody{
+    background-color: grey;
+    color: beige;
+    font-size: 36px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px 5px;
+    line-height: 62px;
+}
+
+/* div{
+    border: 1px solid red;
+} */
+
+
+#subt1-1{
+    position: absolute;
+}
+
+#subt1-2{
+    position: absolute;
+}
+
+#sub1-1{
+    position: absolute;
+}
+
+#sub1-2{
+    position: absolute;
+}
+
+#sub1-3{
+    position: absolute;
+}
+
+
+#subt2-1{
+    position: absolute;
+}
+
+#subt2-2{
+    position: absolute;
+}
+
+#sub2-1{
+    position: absolute;
+}
+
+#sub2-2{
+    position: absolute;
+}
+
+#sub2-3{
+    position: absolute;
+}
+
+#sub2-4{
+    position: absolute;
+}
+
+
+#subt3-1{
+    position: absolute;
+}
+
+#subt3-2{
+    position: absolute;
+}
+
+#sub3-1{
+    position: absolute;
+}
+
+#sub3-2{
+    position: absolute;
+}
+
+#sub3-3{
+    position: absolute;
+}
+
+
+#subt4-1{
+    position: absolute;
+}
+
+#subt4-2{
+    position: absolute;
+}
+
+#sub4-1{
+    position: absolute;
+}
+
+#sub4-2{
+    position: absolute;
+}
+
+#sub4-3{
+    position: absolute;
+}
+
+
+#subt5-1{
+    position: absolute;
+}
+
+#subt5-2{
+    position: absolute;
+}
+
+#sub5-1{
+    position: absolute;
+}
+
+#sub5-2{
+    position: absolute;
+}
+
+#sub5-3{
+    position: absolute;
+}
+
+
+#subt6-1{
+    position: absolute;
+}
+
+#subt6-2{
+    position: absolute;
+}
+
+#subt6-3{
+    position: absolute;
+}
+
+#subt6-4{
+    position: absolute;
+}
+
+#sub6-1{
+    position: absolute;
+}
+
+#sub6-2{
+    position: absolute;
+}
+
+#sub6-3{
+    position: absolute;
+}
+
+#sub6-4{
+    position: absolute;
+}
+
+
+#subt7-1{
+    position: absolute;
+}
+
+#subt7-2{
+    position: absolute;
+}
+
+#subt7-3{
+    position: absolute;
+}
+
+#subt7-4{
+    position: absolute;
+}
+
+#sub7-1{
+    position: absolute;
+}
+
+#sub7-2{
+    position: absolute;
+}
+
+#sub7-3{
+    position: absolute;
+}
+
+#sub7-4{
+    position: absolute;
+}
+
+#sub7-5{
+    position: absolute;
+}
+
+#sub7-6{
+    position: absolute;
+}
+
+#sub7-7{
+    position: absolute;
+}
+
+#sub7-8{
+    position: absolute;
+}
+
+#sub7-9{
+    position: absolute;
+}
+
+#sub7-10{
+    position: absolute;
+}
+
+
+body{
+    position: relative;
+    overflow: hidden;
+}
+
+/* .back{
+    border: 1px solid black;
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    z-index: -99999;
+}
+
+.back-element{
+    background-color: lightgray;
+    height: 210px;
+    width: 210px;
+} */
+
+@font-face {
+    font-family: 'CustomFont';
+    src: url('fonts/simsun.ttc') format('simsun');
+    font-weight: normal;
+    font-style: normal;
+}
