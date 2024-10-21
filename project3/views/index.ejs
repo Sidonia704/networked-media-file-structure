@@ -1,0 +1,145 @@
+<html>
+
+<head>
+  <title>rhytmh</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body style="margin: 0px;">
+  <%- include("nav.ejs",{}) %>
+    <div class="content-container">
+      <div id="gamebar">
+
+        <div class="control-bar">
+          <div class="collBut" onclick="toggleContent('collapsible-content1'); rotateButton('colButton1')">
+            <img src="images/collBut.png" alt="colButton" class="colButton" id="colButton1">
+          </div>
+          <div id="contrlBarText">
+            Hot
+          </div>
+        </div>
+
+        <!-- collapsible content bar for each games division-->
+
+        <div id="collapsible-content1" class="game-icons">
+          <div id=gameicon-hot-row1>
+            <a href="/phigros">
+              <img src="images/phi.png" alt="phi" class="gameBarIcon">
+            </a>
+            <img src="images/cy2.png" alt="cy2" class="gameBarIcon">
+            <img src="images/arc.png" alt="arc" class="gameBarIcon">
+            <img src="images/pjsk.png" alt="pjsk" class="gameBarIcon">
+            <img src="images/osu.png" alt="osu" class="gameBarIcon">
+          </div>
+          <div id="gameicon-hot-row2">
+            <img src="images/bang.png" alt="arc" class="gameBarIcon">
+            <img src="images/mai.png" alt="pjsk" class="gameBarIcon">
+            <img src="images/zhonger.png" alt="osu" class="gameBarIcon">
+          </div>
+
+        </div>
+
+        <div class="control-bar">
+          <div class="collBut" onclick="toggleContent('collapsible-content2'); rotateButton('colButton2')">
+            <img src="images/collBut.png" alt="colButton" class="colButton" id="colButton2">
+          </div>
+          <div id="contrlBarText">
+            Mobile
+          </div>
+        </div>
+        <div id="collapsible-content2" class="game-icons">
+          <img src="images/gamebarmobile.png" alt="gamebarmobile" id="gamebarmobile">
+        </div>
+
+        <div class="control-bar">
+          <div class="collBut" onclick="toggleContent('collapsible-content3'); rotateButton('colButton3')">
+            <img src="images/collBut.png" alt="colButton" class="colButton" id="colButton3">
+          </div>
+          <div id="contrlBarText">
+            PC
+          </div>
+        </div>
+        <div id="collapsible-content3" class="game-icons">
+          <p>PC.................................</p>
+        </div>
+
+        <div class="control-bar">
+          <div class="collBut" onclick="toggleContent('collapsible-content4'); rotateButton('colButton4')">
+            <img src="images/collBut.png" alt="colButton" class="colButton" id="colButton4">
+          </div>
+          <div id="contrlBarText">
+            Arcade
+          </div>
+        </div>
+        <div id="collapsible-content4" class="game-icons">
+          <p>Arcade...........................</p>
+        </div>
+
+        <div class="control-bar">
+          <div class="collBut" onclick="toggleContent('collapsible-content5'); rotateButton('colButton5')">
+            <img src="images/collBut.png" alt="colButton" class="colButton" id="colButton5">
+          </div>
+          <div id="contrlBarText">
+            Other
+          </div>
+        </div>
+        <div id="collapsible-content5" class="game-icons">
+          <p>Other............................</p>
+        </div>
+      </div>
+
+      <!-- central bar with search (search function unfinished) -->
+
+      <div id="central-bar">
+        <div id="search-bar">
+          <div id="search-bar-text">
+            OVERVIEW
+          </div>
+          <div id="search-bar-bar">
+            <form method="POST" action="/search" enctype="multipart/form-data" id="search-submit">
+              <img src="images/search-icon.png" alt="search-icon" id="search-icon">
+              <input type="text" name="text" placeholder="Beatmaps/Authors" id="search-input">
+            </form>
+          </div>
+        </div>
+
+        <img src="images/central.png" alt="central" id="central-image">
+      </div>
+
+
+      <div id="chatbar">
+        <img src="images/chatbar.png" alt="chatbar" id="chatbarimg">
+      </div>
+
+    </div>
+
+
+    <script>
+
+      //collapsibility items
+
+      function toggleContent(id) {
+        var content = document.getElementById(id);
+
+        if (content.style.height === "0px" || content.style.height === "") {
+          content.style.height = content.scrollHeight + "px";
+        } else {
+          content.style.height = "0px";
+        }
+      }
+      function rotateButton(id) {
+        var button = document.getElementById(id);
+
+        if (button.style.transform === "rotate(90deg)") {
+          button.style.transform = "rotate(0deg)";
+        } else {
+          button.style.transform = "rotate(90deg)";
+        }
+        button.style.transition = "transform 0.3s ease";
+      }
+
+    </script>
+
+</body>
+
+</html>

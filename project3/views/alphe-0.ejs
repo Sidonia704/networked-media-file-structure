@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphe-0</title>
+    <link rel="stylesheet" href="/css/songstyle.css">
+</head>
+
+<body style="margin: 0px;">
+
+    <!-- nav bar -->
+    <%- include("nav.ejs",{}) %>
+
+        <!-- title and basic information -->
+        <div class="content-container">
+            <div id="header">
+                <img src="images/songicon/alphe0.png" alt="alphe-0" id="cover">
+                <div id="header-bakground">
+                    <div id="textbar">
+                        <p id="title">Alphe-0</p>
+                        <p id="subtext">Author: LeaF</p>
+                        <p id="subtext">BGV: Optie</p>
+                        <p id="subtext">BPM: 250</p>
+                        <p id="subtext">Length: 140s</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- collapsible content bar for each games -->
+            <div class="control-bar">
+                <div class="contrlBarText" id="contrlBarText1">
+                    Phigros
+                </div>
+                <div class="collBut"
+                    onclick="toggleContent('collapsible-content1'); rotateButton('colButton1'); changecolor('contrlBarText1')">
+                    <img src="images/collBut.png" alt="colButton" class="colButton" id="colButton1">
+                </div>
+            </div>
+            <div id="collapsible-content1" class="game-content">
+                <img src="images/alphe-0-phi.png" alt="alphe-0-phi" id="alphe-0-phi">
+            </div>
+
+            <div class="control-bar">
+                <div class="contrlBarText" id="contrlBarText2">
+                    Malody
+                </div>
+                <div class="collBut"
+                    onclick="toggleContent('collapsible-content2'); rotateButton('colButton2'); changecolor('contrlBarText2')">
+                    <img src="images/collBut.png" alt="colButton" class="colButton" id="colButton2">
+                </div>
+            </div>
+            <div id="collapsible-content2" class="game-content">
+
+            </div>
+
+            <div class="control-bar">
+                <div class="contrlBarText" id="contrlBarText3">
+                    Arcaea
+                </div>
+                <div class="collBut"
+                    onclick="toggleContent('collapsible-content3'); rotateButton('colButton3'); changecolor('contrlBarText3')">
+                    <img src="images/collBut.png" alt="colButton" class="colButton" id="colButton3">
+                </div>
+            </div>
+            <div id="collapsible-content3" class="game-content">
+
+            </div>
+
+            <div class="control-bar">
+                <div class="contrlBarText" id="contrlBarText4">
+                    Taiko no Tatsujin
+                </div>
+                <div class="collBut"
+                    onclick="toggleContent('collapsible-content4'); rotateButton('colButton4'); changecolor('contrlBarText4')">
+                    <img src="images/collBut.png" alt="colButton" class="colButton" id="colButton4">
+                </div>
+            </div>
+            <div id="collapsible-content4" class="game-content">
+
+            </div>
+
+            <div class="control-bar">
+                <div class="contrlBarText" id="contrlBarText5">
+                    CHUNITHM
+                </div>
+                <div class="collBut"
+                    onclick="toggleContent('collapsible-content5'); rotateButton('colButton5'); changecolor('contrlBarText5')">
+                    <img src="images/collBut.png" alt="colButton" class="colButton" id="colButton5">
+                </div>
+            </div>
+            <div id="collapsible-content5" class="game-content">
+
+            </div>
+
+            <div class="control-bar">
+                <div class="contrlBarText" id="contrlBarText6">
+                    OSU
+                </div>
+                <div class="collBut"
+                    onclick="toggleContent('collapsible-content6'); rotateButton('colButton6'); changecolor('contrlBarText6')">
+                    <img src="images/collBut.png" alt="colButton" class="colButton" id="colButton6">
+                </div>
+            </div>
+            <div id="collapsible-content6" class="game-content">
+
+            </div>
+
+            <!-- forum area container -->
+
+            <div class="input-container">
+
+                <!-- content filter -->
+
+                <div class="tagfilter-container">
+                    <p id="filtertext">Filter game you refer to:</p>
+                    <span class="filtertag" onclick="filterTag(this, 'ALL')">ALL</span>
+                    <span class="filtertag" onclick="filterTag(this, 'Phigros')">Phigros</span>
+                    <span class="filtertag" onclick="filterTag(this, 'Malody')">Malody</span>
+                    <span class="filtertag" onclick="filterTag(this, 'Arcaea')">Arcaea</span>
+                    <span class="filtertag" onclick="filterTag(this, 'Taiko no Tasujin')">Taiko no Tasujin</span>
+                    <span class="filtertag" onclick="filterTag(this, 'CHUNITHM')">CHUNITHM</span>
+                    <span class="filtertag" onclick="filterTag(this, 'OSU')">OSU</span>
+                </div>
+
+                <!-- display posts -->
+
+                <% for(let i=arrayToBeSent.length-1; i>= 0; i--) { %>
+                    <div class="message-item-larger">
+                        <div class="message-item">
+                            <div class="message-content-item">
+                                <div class="message">
+                                    <%= arrayToBeSent[i].text %>
+                                </div>
+                                <div class="date">
+                                    <%= arrayToBeSent[i].date %>
+                                </div>
+                            </div>
+
+                            <div class="tag-displayed">
+                                <%= arrayToBeSent[i].tag %>
+                            </div>
+                        </div>
+                        <% if(arrayToBeSent[i].imgSrc){ %>
+                            <div class="item-image">
+                                <img src="<%= arrayToBeSent[i].imgSrc%>">
+
+                            </div>
+                        <% } %>
+                    </div>
+                    <% } %>
+
+                    <!-- upload and input container -->
+
+                        <div id="placeholder"></div>
+                        <form method="POST" action="/upload" enctype="multipart/form-data"
+                            onsubmit="return validateForm(event)">
+
+                            <!-- tag choices -->
+
+                            <div class="tag-container">
+                                <p id="tagtext">Choose game you refer to:</p>
+                                <span class="tag" onclick="selectTag(this, 'ALL')">ALL</span>
+                                <span class="tag" onclick="selectTag(this, 'Phigros')">Phigros</span>
+                                <span class="tag" onclick="selectTag(this, 'Malody')">Malody</span>
+                                <span class="tag" onclick="selectTag(this, 'Arcaea')">Arcaea</span>
+                                <span class="tag" onclick="selectTag(this, 'Taiko no Tasujin')">Taiko no Tasujin</span>
+                                <span class="tag" onclick="selectTag(this, 'CHUNITHM')">CHUNITHM</span>
+                                <span class="tag" onclick="selectTag(this, 'OSU')">OSU</span>
+                            </div>
+                            <input type="hidden" name="selectedTag" id="selectedTag">
+
+                            <!-- text and image upload -->
+
+                            <div id="upload-area">
+                                <textarea name="text" id="commentText"
+                                    placeholder="Leave a comment ~(∠・ω'&lt; )⌒★"></textarea>
+                                <div id="uploadcontrol-container">
+                                    <div id="uploadimage-container">
+                                        <input type="file" name="theimage">
+                                        <img src="images/imageinport.png" alt="imageicon" id="imageinp">
+                                        <img src="images/plusicon.png" alt="plusicon" id="plusicon">
+                                    </div>
+                                    <input type="submit" name="submitbutton" value="POST!">
+                                </div>
+                            </div>
+                        </form>
+            </div>
+        </div>
+
+        <script>
+
+            // collapsibility for game information
+
+            function toggleContent(id) {
+                var content = document.getElementById(id);
+                if (content.style.height === "0px" || content.style.height === "") {
+                    content.style.height = content.scrollHeight + "px";
+                } else {
+                    content.style.height = "0px";
+                }
+            }
+
+            function rotateButton(id) {
+                var button = document.getElementById(id);
+                if (button.style.transform === "rotate(90deg)") {
+                    button.style.transform = "rotate(0deg)";
+                } else {
+                    button.style.transform = "rotate(90deg)";
+                }
+                button.style.transition = "transform 0.3s ease";
+            }
+
+            function changecolor(id) {
+                var text = document.getElementById(id);
+                var currentColor = window.getComputedStyle(text).color;
+
+                if (currentColor === "rgb(255, 255, 255)") {
+                    text.style.color = "#b01de5";
+                } else {
+                    text.style.color = "#ffffff";
+                }
+
+            }
+
+            // Maintains last viewed position when refreshing
+
+            window.addEventListener("beforeunload", function () {
+                sessionStorage.setItem("scrollPosition", window.scrollY);
+            });
+
+            window.addEventListener("load", function () {
+                var scrollPosition = sessionStorage.getItem("scrollPosition");
+                if (scrollPosition !== null) {
+                    window.scrollTo(0, Number(scrollPosition) + 200);
+                }
+            });
+
+            // highlight selected tag
+            //remove other selected tags and add this selected one
+            // pass in this particular selected tag
+
+            function selectTag(element, tagValue) {
+                var tags = document.querySelectorAll('.tag');
+
+                tags.forEach(function (tag) {
+                    tag.classList.remove('selected');
+                });
+                element.classList.add('selected');
+                
+                document.getElementById('selectedTag').value = tagValue;
+            }
+
+            // highlight selected filter tag
+            // get its tag value
+
+            function filterTag(element, tag) {
+                let tags = document.querySelectorAll('.filtertag');
+
+                tags.forEach(function (tagElement) {
+                    tagElement.classList.remove('selected');
+                });
+                element.classList.add('selected');
+
+                filterPostsByTag(tag);
+            }
+
+            // hide and unhide posts based one comparing tags
+
+            function filterPostsByTag(tag) {
+                var posts = document.querySelectorAll('.message-item-larger');
+
+                posts.forEach(function (post) {
+                    var postTag = post.querySelector('.tag-displayed').innerText.trim();
+
+                    if (tag === 'ALL') {
+                        post.classList.remove('hidden');
+                    }
+                    else if (postTag === tag) {
+                        post.classList.remove('hidden');
+                    }
+                    else {
+                        post.classList.add('hidden');
+                    }
+                });
+            }
+
+            // check if the message box is empty and if so prohibit post
+
+            function validateForm() {
+                var commentText = document.getElementById('commentText').value;
+                
+                if (commentText.trim() === '') {
+                    alert('please type in something');
+                    return false;
+                }
+                return true;
+            }
+
+        </script>
+
+</body>
+
+</html>
