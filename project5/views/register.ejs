@@ -1,0 +1,66 @@
+<div class="form-container">
+    <h1> 注册电子木鱼账户</h1>
+    <form method="POST" action="/signup" enctype="multipart/form-data">
+        <div class="register-content-container">
+            <input type="text" name="username" placeholder="选择用户名" class="login-username">
+            <input type="password" name="password" placeholder="设置密码" class="login-password">
+            <input type="submit" name="submitbutton" value="注册" class="submit-btn">
+        </div>
+    </form>
+</div>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #e6c74c;
+        font-family: Arial, sans-serif;
+    }
+
+    .form-container {
+        background-color: #faecb3;
+        padding: 30px 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 350px;
+    }
+
+    .form-container h1 {
+        margin-bottom: 20px;
+        color: #555;
+        font-size: 24px;
+    }
+
+    .register-content-container input[type="text"],
+    .register-content-container input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 14px;
+        background-color: #fff8dc;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        background-color: #ffd966;
+        font-size: 16px;
+        font-weight: bold;
+        color: #555;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background-color: #ffc107;
+    }
+</style>

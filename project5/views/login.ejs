@@ -1,0 +1,79 @@
+<body>
+    <div class="form-container">
+        <h1>登录电子木鱼</h1>
+        <form method="POST" action="/authenticate">
+            <input type="text" name="username" placeholder="用户名">
+            <input type="password" name="password" placeholder="密码">
+            <input type="submit" name="submitbutton" value="开始积功德" class="submit-btn">
+            <a href="/register" class="register-link"> 注册账户</a>
+        </form>
+    </div>
+</body>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #e6c74c;
+        font-family: Arial, sans-serif;
+    }
+
+    .form-container {
+        background-color: #faecb3;
+        padding: 30px 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 300px;
+    }
+
+    .form-container h1 {
+        margin-bottom: 20px;
+        color: #555;
+        font-size: 24px;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 14px;
+        background-color: #fff8dc;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+        background-color: #ffd966;
+        font-size: 16px;
+        font-weight: bold;
+        color: #555;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background-color: #ffc107;
+    }
+
+    .register-link {
+        display: block;
+        margin-top: 10px;
+        font-size: 14px;
+        color: #555;
+        text-decoration: none;
+    }
+
+    .register-link:hover {
+        text-decoration: underline;
+    }
+</style>

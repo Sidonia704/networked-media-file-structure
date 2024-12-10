@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实时更新示例</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="/socket.io/socket.io.js"></script>
+  <link rel="icon" href="data:image/x-icon,">
+</head>
+
+<body>
+  <div id="navbar">
+    <div id="leftNavGroup">
+      <button id="showPopup2">规则明细</button>
+      <div id="totalPointsPoints">
+        <p>今日功德箱: <span id="totalPoints">
+            <%= totalpoints %>
+          </span></p>
+      </div>
+      <div id="timeLeftDisplayed">
+        <p>功德重置倒计时: <span id="timeRemaining"></span></p>
+      </div>
+    </div>
+    <div id="rightNavGroup">
+      <button id="updatePointsButton">升级木鱼</button>
+      <button id="donateButton">贡献功德箱</button>
+      <button id="laughButton">佛祖陪你笑<br>(-500功德 谨慎使用)</button>
+      <button id="nuclearButton">启动究极核动力木鱼<br>(-5000功德)</button>
+      <button onclick="window.location.href='/logout'">登出<br>
+        <%= username %>
+      </button>
+    </div>
+  </div>
+
+  <div id=content>
+    <div id="chatContainer">
+      <div id="chatHeader">祝福板</div>
+      <div id="messages">
+        <% messages.forEach(function(msg) { %>
+          <%= msg.content %>
+            <% }); %>
+      </div>
+    </div>
+
+    <div id="clickArea">
+      <div id="muyu">
+        <div id="title">
+          敲电子木鱼，见朋克佛祖，积赛博功德
+        </div>
+        <div id="muyuText">
+          <div id="warningMessage" style="display: none; color: red; font-size: 16px;"></div>
+          <p>个人功德余额: <span id="pointsDisplay">
+              <%= points %>
+            </span></p>
+        </div>
+        <div id="muyuImage">
+          <div id="dongdejiayi">
+            功德+<%= rank %>
+          </div>
+          <p id="lv">LV<%= rank %>
+          </p>
+          <img src="/images/damuyu.png" alt="damuyu" id="damuyuImage" />
+          <img src="/images/gunzi.png" alt="gunzi" id="gunziImage" />
+        </div>
+      </div>
+
+      <audio id="laughSound" src="/audio/laughSound.mp3" preload="auto"></audio>
+      <audio id="clickSound" src="/audio/clickSound_1.mp3" preload="auto"></audio>
+      <div id="updateContainer">
+        <div id="user-container"></div>
+        <div id="userList">在线用户列表</div>
+      </div>
+
+      <div id="overlay"></div>
+      <div id="popup2">
+        <h2>电子木鱼规则说明</h2>
+        <p>本站双核电子木鱼敲击时将产生两份功德，其中一份将自动贡献给功德箱。</p>
+        <p>升级木鱼：花费功德升级木鱼</p>
+        <ul>
+          <li>LV1: 花费0，每次敲击：功德+1</li>
+          <li>LV2: 花费100，每次敲击：功德+2</li>
+          <li>LV3: 花费300，每次敲击：功德+3</li>
+          <li>LV4: 花费500，每次敲击：功德+4</li>
+          <li>LV5: 花费700，每次敲击：功德+5</li>
+        </ul>
+        <p>贡献功德箱：将余额全部捐赠功德箱(先升级木鱼收益更佳哦)。</p>
+        <p>佛祖陪你笑：全局广播，但会扣自身功德，可以扣成负数，谨慎使用。</p>
+        <p>终极木鱼：每秒敲击20下的终极自动木鱼，但需要5000功德启动，刷新页面将重置，请务必耐心等待功德回本。</p>
+        <p>升级佛祖：本站佛祖会根据功德箱内功德升级。</p>
+        <p>重置：倒计时结束后本站所有功德数据将重置。</p>
+        <button id="closePopup2">明白了</button>
+      </div>
+
+    </div>
+    <div id="rightContent">
+      <div id="rightText">
+        <div id="upgradeText"></div>
+      </div>
+      <div id="rightInput">
+
+        <button id="bgmButton">BGM</button>
+        <audio id="bgmAudio" loop>
+          <source src="/audio/bgm.mp3" type="audio/mp3" preload="auto">
+        </audio>
+
+        <button id="imageButton">
+          <img src="/images/textButton.png" alt="Button Image" id="buttonImage" />
+          <div id="buttonText">
+            <p>发祝福求保佑</p>
+          </div>
+        </button>
+
+        <div id="popup" class="hidden">
+          <div id="popupContent">
+            <input id="messageInput" type="text" placeholder="抠1请求佛祖保佑">
+            <button id="sendButton">投送祝福</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    updateBackgroundColor(totalPoints)
+
+    window.onload = function () {
+      const socket = io();
+      const username = "<%= username %>";
+      const messagesDiv = document.getElementById('messages');
+      const messageInput = document.getElementById('messageInput');
+      const sendButton = document.getElementById('sendButton');
+      const laughButton = document.getElementById('laughButton');
+      const laughSound = document.getElementById('laughSound');
+      const clickSound = document.getElementById('clickSound');
+      const damuyuImage = document.getElementById('damuyuImage');
+      const gunziImage = document.getElementById('gunziImage');
+      let point = 0;
+
+      socket.emit('registerUser', username);
+
+      socket.on('connect', () => {
+        console.log('Socket.IO 已成功连接');
+      });
+
+      socket.on('disconnect', () => {
+        console.log('Socket.IO 连接已断开');
+      });
+
+      socket.on("updatePoints", (newPoints) => {
+        document.getElementById("pointsDisplay").innerText = newPoints;
+        point = newPoints;
+        console.log(point)
+        if (point < 0) {
+          updateBackgroundColor2(point)
+        }
+      });
+
+      socket.on("updateRank", (updatedRank) => {
+        const dongdejiayiDiv = document.getElementById("dongdejiayi");
+        const lv = document.getElementById("lv");
+        if (dongdejiayiDiv) {
+          dongdejiayiDiv.textContent = `功德+${updatedRank + 1}`;
+        }
+        if (lv) {
+          lv.textContent = `LV${updatedRank + 1}`;
+        }
+      });
+
+      socket.on("updateTotalPoints", (totalPoints) => {
+        document.getElementById("totalPoints").innerText = totalPoints;
+        if (point >= 0) {
+          updateBackgroundColor(totalPoints);
+        }
+      });
+
+      socket.on("underwarning", (data) => {
+        const warningMessage = data.message;
+        const warningElement = document.getElementById("warningMessage");
+
+        warningElement.innerText = warningMessage;
+        warningElement.style.display = "block";
+
+        setTimeout(() => {
+          warningElement.style.display = "none";
+        }, 3000);
+      });
+
+      socket.on("exceedwarning", (data) => {
+        const warningMessage = data.message;
+
+        const warningElement = document.getElementById("warningMessage");
+
+        warningElement.innerText = warningMessage;
+        warningElement.style.display = "block";
+
+        setTimeout(() => {
+          warningElement.style.display = "none";
+        }, 3000);
+      });
+
+      socket.on('updateMessage', (messageData) => {
+        const messageElement = document.createElement('div');
+        messageElement.id = `message-${messageData.id}`;
+        messageElement.innerHTML = `${messageData.content}`;
+        messagesDiv.appendChild(messageElement);
+
+        setTimeout(() => {
+          const elementToRemove = document.getElementById(`message-${messageData.id}`);
+          if (elementToRemove) {
+            messagesDiv.removeChild(elementToRemove);
+          }
+        }, 15000);
+      });
+
+      socket.on("playLaugh", () => {
+        laughSound.play();
+      });
+
+      sendButton.addEventListener('click', () => {
+        const message = messageInput.value.trim();
+        if (message) {
+          socket.emit('newMessage', message);
+          messageInput.value = '';
+        }
+      });
+
+      document.getElementById("laughButton").addEventListener("click", () => {
+        socket.emit("laugh", { username });
+      });
+
+      document.getElementById("donateButton").addEventListener("click", () => {
+        socket.emit("donatePoints", { username });
+      });
+
+      document.getElementById("updatePointsButton").addEventListener("click", () => {
+        socket.emit("updateUserPointsAndRank", { username });
+      });
+
+      document.getElementById('clickArea').addEventListener('click', function () {
+        // 发送点击事件到服务器，携带用户名
+        socket.emit('userClick', { username });
+        clickSound.play();
+        magnifyImage(damuyuImage)
+        rotateImage(gunziImage)
+        showAndHideElement('dongdejiayi')
+      });
+
+      document.getElementById("nuclearButton").addEventListener("click", () => {
+        socket.emit('startNuclear', { username });
+      });
+
+      socket.on("nuclearStarted", () => {
+
+        function simulateClick() {
+          socket.emit('userClick', { username });
+          clickSound.play();
+        }
+        setInterval(simulateClick, 50);
+      });
+
+      socket.on('updateUserList', (userList) => {
+        const userListContainer = document.getElementById('userList');
+        userListContainer.innerHTML = '';
+        userList.forEach(user => {
+          const userItem = document.createElement('div');
+          userItem.textContent = user;
+          userListContainer.appendChild(userItem);
+        });
+      });
+
+      socket.on('updateOnlineUsers', (count) => {
+        const onlineUsersCount = document.getElementById('onlineUsersCount');
+        if (onlineUsersCount) {
+          onlineUsersCount.innerText = count;
+        }
+        updateUserBoxes(count);
+      });
+
+      function updateUserBoxes(count) {
+        const container = document.getElementById('user-container');
+        if (container) {
+          container.innerHTML = '';
+
+          for (let i = 0; i < count; i++) {
+            const box = document.createElement('img');
+            box.className = 'user-box';
+            box.src = '/images/xiaomuyu.png';
+            box.alt = 'User Box';
+            container.appendChild(box);
+          }
+        }
+      }
+
+      const initialCount = <%= onlineUsers %>;
+      updateUserBoxes(initialCount);
+    }
+
+    let time = <%= remainingTime %>;
+    let bgmButton = document.getElementById("bgmButton");
+    let bgmAudio = document.getElementById("bgmAudio");
+    const overlay = document.getElementById("overlay");
+    const popup = document.getElementById("popup2");
+
+    bgmButton.addEventListener("click", function () {
+      if (bgmAudio.paused) {
+        bgmAudio.play();
+      } else {
+        bgmAudio.pause();
+      }
+    });
+
+    function formatTime(ms) {
+      const totalSeconds = Math.floor(ms / 1000);
+      const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+      const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+      const seconds = String(totalSeconds % 60).padStart(2, '0');
+      return `${hours}:${minutes}:${seconds}`;
+    }
+
+    function updateCountdown() {
+      const displayElement = document.getElementById('timeRemaining');
+
+      if (displayElement) {
+        displayElement.textContent = formatTime(time);
+      }
+      time -= 1000;
+      if (time <= 0) {
+        time = 24 * 60 * 60 * 1000;
+        console.log('Countdown reset to 24 hours!');
+      }
+    }
+
+    function updateBackgroundColor(totalPoints) {
+      let remainingPoints = 0;
+      const body = document.body;
+      body.style.backgroundImage = "";
+      body.style.backgroundSize = "cover";
+      body.style.backgroundRepeat = "no-repeat";
+      body.style.backgroundPosition = "center";
+      const upgradeText = document.getElementById("upgradeText");
+      if (totalPoints >= 0 && totalPoints < 6666) {
+        remainingPoints = 6666 - totalPoints;
+        body.style.backgroundImage = "url('/images/bg1.png')"
+        upgradeText.innerHTML = `佛祖：燃气古佛<br>距升级还差：${remainingPoints}`;
+      } else if (totalPoints >= 6666 && totalPoints < 23333) {
+        remainingPoints = 23333 - 6666 - totalPoints;
+        body.style.backgroundImage = "url('/images/bg2.png')";
+        upgradeText.innerHTML = `佛祖：立本大电音佛<br>距升级还差：${remainingPoints}`;
+      } else if (totalPoints >= 23333 && totalPoints < 114514) {
+        remainingPoints = 114514 - 23333 - totalPoints;
+        body.style.backgroundImage = "url('/images/bg3.png')";
+        upgradeText.innerHTML = `佛祖：北美撞火天尊<br>距升级还差：${remainingPoints}`;
+      } else if (totalPoints >= 114514) {
+        body.style.backgroundImage = "url('/images/bg4.png')";
+        upgradeText.innerHTML = `佛祖：古今未来佛<br>既见未来, 为何不buy<br>(满级)`;
+      } else {
+        body.style.backgroundImage = "";
+      }
+    }
+
+    function updateBackgroundColor2(Points) {
+      const body = document.body;
+      body.style.backgroundImage = "";
+      body.style.backgroundSize = "cover";
+      body.style.backgroundRepeat = "no-repeat";
+      body.style.backgroundPosition = "center";
+      const upgradeText = document.getElementById("upgradeText");
+      if (Points <= 0) {
+        body.style.backgroundImage = "url('/images/bg0.png')"
+        upgradeText.innerHTML = '功德透支<br>佛祖鉴定你为异教徒';
+      } else {
+        body.style.backgroundImage = "";
+      }
+    }
+
+    function magnifyImage(image) {
+      image.classList.add('magnified');
+      setTimeout(function () {
+        image.classList.remove('magnified');
+      }, 100);
+    }
+
+    function rotateImage() {
+      const gunziImage = document.getElementById('gunziImage');
+      gunziImage.style.transform = 'rotate(-15deg)';
+      setTimeout(function () {
+        gunziImage.style.transform = 'rotate(0deg)';
+      }, 50);
+    }
+
+    function showAndHideElement(elementId) {
+      const element = document.getElementById(elementId);
+
+      if (!element) {
+        console.error("Element not found!");
+        return;
+      }
+      element.style.display = 'block';
+      element.style.opacity = 1;
+      setTimeout(function () {
+        element.style.opacity = 0;
+      }, 100);
+      setTimeout(function () {
+        element.style.display = 'none';
+      }, 300);
+    }
+
+    document.getElementById("imageButton").addEventListener("click", function () {
+      const popup = document.getElementById("popup");
+      if (popup.classList.contains("hidden")) {
+        popup.classList.remove("hidden");
+      } else {
+        popup.classList.add("hidden");
+      }
+    });
+
+    document.getElementById("showPopup2").addEventListener("click", () => {
+      overlay.style.display = "block";
+      popup.style.display = "block";
+    });
+
+    document.getElementById("closePopup2").addEventListener("click", () => {
+      overlay.style.display = "none";
+      popup.style.display = "none";
+    });
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+  </script>
+</body>
+
+</html>
